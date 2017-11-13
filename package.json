@@ -1,0 +1,54 @@
+{
+  "name": "serverless-image-processor",
+  "version": "1.0.0",
+  "description": "AWS Lambda image processor",
+  "scripts": {
+    "start": "sls offline",
+    "test": "jest --testPathPattern=tests/unit --silent",
+    "test:coverage": "jest --coverage --testPathPattern=tests/unit --silent",
+    "test:watch": "jest --watch --testPathPattern=tests/unit --silent",
+    "test:e2e": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
+    "test:e2e:u": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/tests/.*)\\.(ts?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "json",
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.webpack/",
+      "<rootDir>/compiled/"
+    ]
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/jest": "^21.1.6",
+    "aws-sdk": "^2.149.0",
+    "axios": "^0.17.0",
+    "copy-webpack-plugin": "^4.2.0",
+    "jest": "^21.2.1",
+    "serverless": "^1.24.1",
+    "serverless-apigw-binary": "^0.4.3",
+    "serverless-offline": "^3.16.0",
+    "serverless-s3-local": "https://github.com/otbe/serverless-s3-local.git",
+    "serverless-webpack": "^4.0.0",
+    "ts-jest": "^21.2.1",
+    "ts-loader": "^2.3.7",
+    "typescript": "^2.5.2",
+    "webpack": "^3.6.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "dependencies": {
+    "@types/mime": "^2.0.0",
+    "@types/ramda": "^0.25.3",
+    "@types/sharp": "^0.17.5",
+    "mime": "^2.0.3",
+    "ramda": "^0.25.0",
+    "sharp": "0.18.4"
+  }
+}

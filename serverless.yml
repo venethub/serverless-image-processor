@@ -1,0 +1,92 @@
+service:
+  name: serverless-image-processor
+
+plugins:
+  - serverless-webpack
+  - serverless-s3-local
+  - serverless-apigw-binary
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:getObject
+      Resource:
+        Fn::Join: [ "", [ "arn:aws:s3:::", Ref: SourceBucket, "/*" ] ]
+
+custom:
+  s3:
+    host: 0.0.0.0
+    port: 5445
+    directory: .
+    cors: false
+  webpackIncludeModules:
+    forceInclude:
+      - sharp
+  apigwBinary:
+    types:
+      - 'text/html'
+      - 'image/jpeg'
+      - 'image/png'
+      - 'image/webp'
+
+functions:
+  processor:
+    handler: src/index.process
+    timeout: 15
+    memorySize: 1532
+    environment:
+      BUCKET: { Ref: SourceBucket }
+    events:
+      - http:
+          method: get
+          path: /{proxy+}
+
+resources:
+  Resources:
+    SourceBucket:
+      Type: AWS::S3::Bucket
+    WebDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - Id: ImageOrigin
+              DomainName:
+                Fn::Join:
+                  - ""
+                  - - Ref: ApiGatewayRestApi
+                    - ".execute-api."
+                    - ${self:provider.region}
+                    - ".amazonaws.com"
+              OriginPath: "/${self:provider.stage}"
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: match-viewer
+          Enabled: true
+          HttpVersion: http2
+          DefaultCacheBehavior:
+            AllowedMethods:
+              - GET
+              - HEAD
+            TargetOriginId: ImageOrigin
+            ForwardedValues:
+              QueryString: true
+              Cookies:
+                Forward: none
+            ViewerProtocolPolicy: allow-all
+  Outputs:
+    WebDistributionUrl:
+      Description: "Cloudfront url"
+      Value:
+        Fn::GetAtt: WebDistribution.DomainName
+    SourceBucketName:
+      Description: "Image bucket"
+      Value:
+        Ref: SourceBucket
