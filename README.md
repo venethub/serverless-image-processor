@@ -1,4 +1,4 @@
-# serverless-image-processor
+# [WIP] serverless-image-processor
 
 [![Build Status](https://travis-ci.org/Mercateo/serverless-image-processor.svg?branch=master)](https://travis-ci.org/Mercateo/serverless-image-processor)
 [![Coverage Status](https://coveralls.io/repos/github/Mercateo/serverless-image-processor/badge.svg?branch=master)](https://coveralls.io/github/Mercateo/serverless-image-processor?branch=master)
@@ -6,7 +6,6 @@
 [![NSP Status](https://nodesecurity.io/orgs/opensource/projects/c56c0c76-edb1-460a-95c0-4be30a573a57/badge)](https://nodesecurity.io/orgs/opensource/projects/c56c0c76-edb1-460a-95c0-4be30a573a57)
 [![Maintainability](https://api.codeclimate.com/v1/badges/149b0866f7121aad91a9/maintainability)](https://codeclimate.com/github/Mercateo/serverless-image-processor/maintainability)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Mercateo/serverless-image-processor/blob/master/LICENSE)
-
 
 This is a [Serverless](https://serverless.com) starter for an image processing lambda. It will create a Cloudfront Distribution, an API Gateway, a image source Bucket and a Lambda function. It's based on the phenomenal [sharp](https://github.com/lovell/sharp) image manipulation and conversion library.
 
