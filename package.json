@@ -2,28 +2,28 @@
   "name": "serverless-image-processor",
   "version": "1.0.0",
   "description": "AWS Lambda image processor",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mercateo/serverless-image-processor"
+  },
   "scripts": {
     "start": "sls offline",
     "test": "jest --testPathPattern=tests/unit --silent",
     "test:coverage": "jest --coverage --testPathPattern=tests/unit --silent",
     "test:watch": "jest --watch --testPathPattern=tests/unit --silent",
-    "test:e2e": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
-    "test:e2e:u": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
+    "test:e2e":
+      "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
+    "test:e2e:u":
+      "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
   },
   "jest": {
     "transform": {
       "^.+\\.ts?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/tests/.*)\\.(ts?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "json",
-      "js"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/.webpack/",
-      "<rootDir>/compiled/"
-    ]
+    "moduleFileExtensions": ["ts", "json", "js"],
+    "modulePathIgnorePatterns": ["<rootDir>/.webpack/", "<rootDir>/compiled/"]
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
