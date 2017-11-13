@@ -13,6 +13,11 @@ This is a [Serverless](https://serverless.com) starter for an image processing l
 Request flow is:  
 User -> Cloudfront -> API Gateway -> Lambda
 
+## Demo
+[http://d12k6sini6hcl3.cloudfront.net/test.png?width=300](http://d12k6sini6hcl3.cloudfront.net/test.png?width=300)
+[http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300](http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300)
+[http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300](http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300)
+
 ## Features
 Request Url: ```https://[CloudfrontUrl]/[S3Key]```  
 Possible query parameters are:
@@ -70,7 +75,7 @@ export interface QueryParams {
 }
 ```
 
-# Local development
+## Local development
 
 1. ```$ yarn```
 2. ```$ yarn start```
@@ -79,14 +84,14 @@ That's it! :)
 
 The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```. Due to restrictions in this setup you will only see the Base64 encoded response. 
 
-# Contributing
+## Contributing
 Please feel free to open issue or create PRs. :)  
 Just run the test suites (```yarn test``` and ```yarn test:e2e```) and create new tests for added features.
 Also make sure you run ```yarn lint``` (and ```yarn lint:fix```) to check for code style issues.
 
-# A note on updating sharp
+## A note on updating sharp
 ```sharp``` is fixed at version ```0.18.4```. If you plan to upgrade please follow [this](http://sharp.dimens.io/en/stable/install/#aws-lambda) guide and place the output in the ```compiled/``` folder.
 
-# Credits
+## Credits
 Example photos by Adi Constantin, Michael DePetris, Blake Connally on Unsplash
 
