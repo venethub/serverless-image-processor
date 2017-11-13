@@ -39,7 +39,7 @@
     "serverless-s3-local": "https://github.com/otbe/serverless-s3-local.git",
     "serverless-webpack": "^4.0.0",
     "ts-jest": "^21.2.1",
-    "ts-loader": "^2.3.7",
+    "ts-loader": "^3.1.1",
     "typescript": "^2.5.2",
     "webpack": "^3.6.0",
     "webpack-node-externals": "^1.6.0"
