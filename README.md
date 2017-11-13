@@ -1,5 +1,8 @@
 # serverless-image-processor
 
+[![Build Status](https://travis-ci.org/Mercateo/serverless-image-processor.svg?branch=master)](https://travis-ci.org/Mercateo/serverless-image-processor)
+[![Coverage Status](https://coveralls.io/repos/github/Mercateo/serverless-image-processor/badge.svg?branch=master)](https://coveralls.io/github/Mercateo/serverless-image-processor?branch=master)
+
 This is a [Serverless](https://serverless.com) starter for an image processing lambda. It will create a Cloudfront Distribution, an API Gateway, a image source Bucket and a Lambda function. It's based on the phenomenal [sharp](https://github.com/lovell/sharp) image manipulation and conversion library.
 
 Request flow is:  
