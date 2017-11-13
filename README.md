@@ -79,8 +79,9 @@ That's it! :)
 The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```. Due to restrictions in this setup you will only see the Base64 encoded response. 
 
 # Contributing
-Please feel free to open issue or create PRs. :)  
+Please feel free to open issues or create PRs. :)  
 Just run the test suites (```yarn test``` and ```yarn test:e2e```) and create new tests for added features.
+Notice: the end to end tests may fail on your setup. I work on this :/
 
 # A note on updating sharp
 ```sharp``` is fixed at version ```0.18.4```. If you plan to upgrade please follow [this](http://sharp.dimens.io/en/stable/install/#aws-lambda) guide and place the output in the ```compiled/``` folder.
