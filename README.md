@@ -18,9 +18,13 @@ User -> Cloudfront -> API Gateway -> Lambda
 [http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300](http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300)  
 [http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300](http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300)
 
-## Features
-Request Url: ```https://[CloudfrontUrl]/[S3Key]```  
-Possible query parameters are:
+## Supported formats
+  
+Input: ```image/jpeg```, ```image/png```, ```image/gif```  
+Output: ```image/jpeg```, ```image/png```, ```image/webp```
+
+
+## Query params
 ```typescript
 export interface QueryParams {
   /**
@@ -84,8 +88,8 @@ That's it! :)
 
 The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```. Due to restrictions in this setup you will only see the Base64 encoded response. 
 
-# Contributing
-Please feel free to open issue or create PRs. :)  
+## Contributing
+Please feel free to open issues or create PRs. :)  
 Just run the test suites (```yarn test``` and ```yarn test:e2e```) and create new tests for added features.
 Also make sure you run ```yarn lint``` (and ```yarn lint:fix```) to check for code style issues.
 Notice: the end to end tests may fail on your setup. I work on this :/
