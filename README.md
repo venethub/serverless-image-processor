@@ -1,5 +1,7 @@
 # serverless-image-processor
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Mercateo/serverless-image-processor.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/Mercateo/serverless-image-processor.svg?branch=master)](https://travis-ci.org/Mercateo/serverless-image-processor)
 [![Coverage Status](https://coveralls.io/repos/github/Mercateo/serverless-image-processor/badge.svg?branch=master)](https://coveralls.io/github/Mercateo/serverless-image-processor?branch=master)
 
