@@ -7,6 +7,11 @@ cache:
   directories:
     - node_modules
 
+before_script:
+  - echo "exporting dummy AWS keys"
+  - export AWS_ACCESS_KEY_ID=foo
+  - export AWS_SECRET_ACCESS_KEY=bar
+
 script:
   - yarn test:coverage
   - yarn test:e2e
