@@ -1,5 +1,5 @@
-import { JpegOptions, SharpInstance } from 'sharp';
-import { curry, pipe } from 'ramda';
+import { SharpInstance } from 'sharp';
+import { pipe } from 'ramda';
 import { InputQueryParams } from '../QueryParams';
 import { manipulate } from './manipulation';
 import { convert } from './conversion';

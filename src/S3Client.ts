@@ -1,5 +1,4 @@
 import * as AWS from 'aws-sdk';
-import { createReadStream } from 'fs';
 import { getS3ClientConfig, getBucketName } from './Utils';
 
 export const streamS3Object = (

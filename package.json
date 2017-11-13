@@ -10,20 +10,31 @@
   "scripts": {
     "start": "sls offline",
     "test": "jest --testPathPattern=tests/unit --silent",
+    "lint": "prettier-tslint check \"{src,tests}/**/*.ts\"",
+    "lint:fix": "prettier-tslint fix \"{src,tests}/**/*.ts\"",
     "test:coverage": "jest --coverage --testPathPattern=tests/unit --silent",
     "test:watch": "jest --watch --testPathPattern=tests/unit --silent",
-    "test:e2e":
-      "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
-    "test:e2e:u":
-      "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
+    "test:e2e": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
+    "test:e2e:u": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
+  },
+  "prettier": {
+    "parser": "typescript",
+    "singleQuote": true
   },
   "jest": {
     "transform": {
       "^.+\\.ts?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testRegex": "(/tests/.*)\\.(ts?|tsx?)$",
-    "moduleFileExtensions": ["ts", "json", "js"],
-    "modulePathIgnorePatterns": ["<rootDir>/.webpack/", "<rootDir>/compiled/"]
+    "moduleFileExtensions": [
+      "ts",
+      "json",
+      "js"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/.webpack/",
+      "<rootDir>/compiled/"
+    ]
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
@@ -33,6 +44,8 @@
     "copy-webpack-plugin": "^4.2.0",
     "coveralls": "^3.0.0",
     "jest": "^21.2.1",
+    "prettier": "^1.8.2",
+    "prettier-tslint": "^0.3.0",
     "serverless": "^1.24.1",
     "serverless-apigw-binary": "^0.4.3",
     "serverless-offline": "^3.16.0",

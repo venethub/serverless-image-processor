@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/Mercateo/serverless-image-processor.svg?branch=master)](https://travis-ci.org/Mercateo/serverless-image-processor)
 [![Coverage Status](https://coveralls.io/repos/github/Mercateo/serverless-image-processor/badge.svg?branch=master)](https://coveralls.io/github/Mercateo/serverless-image-processor?branch=master)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Mercateo/serverless-image-processor.svg)](https://greenkeeper.io/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![NSP Status](https://nodesecurity.io/orgs/opensource/projects/c56c0c76-edb1-460a-95c0-4be30a573a57/badge)](https://nodesecurity.io/orgs/opensource/projects/c56c0c76-edb1-460a-95c0-4be30a573a57)
 [![Maintainability](https://api.codeclimate.com/v1/badges/149b0866f7121aad91a9/maintainability)](https://codeclimate.com/github/Mercateo/serverless-image-processor/maintainability)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Mercateo/serverless-image-processor/blob/master/LICENSE)
@@ -11,6 +12,11 @@ This is a [Serverless](https://serverless.com) starter for an image processing l
 
 Request flow is:  
 User -> Cloudfront -> API Gateway -> Lambda
+
+## Demo
+[http://d12k6sini6hcl3.cloudfront.net/test.png?width=300](http://d12k6sini6hcl3.cloudfront.net/test.png?width=300)
+[http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300](http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300)
+[http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300](http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300)
 
 ## Features
 Request Url: ```https://[CloudfrontUrl]/[S3Key]```  
@@ -69,7 +75,7 @@ export interface QueryParams {
 }
 ```
 
-# Local development
+## Local development
 
 1. ```$ yarn```
 2. ```$ yarn start```
@@ -79,13 +85,14 @@ That's it! :)
 The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```. Due to restrictions in this setup you will only see the Base64 encoded response. 
 
 # Contributing
-Please feel free to open issues or create PRs. :)  
+Please feel free to open issue or create PRs. :)  
 Just run the test suites (```yarn test``` and ```yarn test:e2e```) and create new tests for added features.
+Also make sure you run ```yarn lint``` (and ```yarn lint:fix```) to check for code style issues.
 Notice: the end to end tests may fail on your setup. I work on this :/
 
-# A note on updating sharp
+## A note on updating sharp
 ```sharp``` is fixed at version ```0.18.4```. If you plan to upgrade please follow [this](http://sharp.dimens.io/en/stable/install/#aws-lambda) guide and place the output in the ```compiled/``` folder.
 
-# Credits
+## Credits
 Example photos by Adi Constantin, Michael DePetris, Blake Connally on Unsplash
 

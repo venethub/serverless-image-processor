@@ -1,5 +1,4 @@
 import { SharpInstance } from 'sharp';
-import { resolve } from 'path';
 import { isDevEnv } from './Utils';
 
 export const getTransformer = (): SharpInstance => {
