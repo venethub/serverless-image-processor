@@ -33,11 +33,11 @@ describe('Convert.ts', () => {
   });
 
   it('image/gif -> image/webp', () => {
-    expect(
-      convert({ webp: 'true' }, 'image/gif', sharpInstance)
-    ).toMatchObject({
-      mime: 'image/webp'
-    });
+    expect(convert({ webp: 'true' }, 'image/gif', sharpInstance)).toMatchObject(
+      {
+        mime: 'image/webp'
+      }
+    );
     expect(webPMock).toHaveBeenCalled();
   });
 
@@ -48,11 +48,11 @@ describe('Convert.ts', () => {
     expect(jpegMock).toHaveBeenCalled();
     jpegMock.mockReset();
 
-    expect(
-      convert({ jpg: 'true' }, 'image/jpeg', sharpInstance)
-    ).toMatchObject({
-      mime: 'image/jpeg'
-    });
+    expect(convert({ jpg: 'true' }, 'image/jpeg', sharpInstance)).toMatchObject(
+      {
+        mime: 'image/jpeg'
+      }
+    );
     expect(jpegMock).toHaveBeenCalled();
   });
 
@@ -80,11 +80,11 @@ describe('Convert.ts', () => {
   });
 
   it('image/png -> image/webp', () => {
-    expect(
-      convert({ webp: 'true' }, 'image/png', sharpInstance)
-    ).toMatchObject({
-      mime: 'image/webp'
-    });
+    expect(convert({ webp: 'true' }, 'image/png', sharpInstance)).toMatchObject(
+      {
+        mime: 'image/webp'
+      }
+    );
     expect(webPMock).toHaveBeenCalled();
   });
 });
