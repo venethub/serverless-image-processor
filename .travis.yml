@@ -1,18 +1,26 @@
 language: node_js
 node_js:
-- "6.10"
+- '6.10'
 
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
+
+before_install: yarn global add greenkeeper-lockfile@1
 
 before_script:
-  - echo "exporting dummy AWS keys"
-  - export AWS_ACCESS_KEY_ID=foo
-  - export AWS_SECRET_ACCESS_KEY=bar
+- echo "exporting dummy AWS keys"
+- export AWS_ACCESS_KEY_ID=foo
+- export AWS_SECRET_ACCESS_KEY=bar
+- greenkeeper-lockfile-update
+
+after_script: greenkeeper-lockfile-upload
 
 script:
-  - yarn test:coverage
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
-  # - yarn test:e2e
+- yarn test:coverage
+- cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+
+env:
+  global:
+    secure: EVItCV79ffSgRIRvGXGYy59PsYZ6SKxQ0uywVzXDWOev/3Tyv+Q1lFveBKWNqyD78sSQ4gD2TNR/87U968tFuRb/R7H7XhPVB9NCpAm4HPswaAEz+MtilO4VMJn51MKFy6S0KXx5LqQMm3mVJOLj3rUAbGm9f0Ji6wBg8L4tXyYNFVUg1LJdkgq1ai1nGbWt0sR9HNrxnodeo4H9eHW7l878NYmZKmlTVmD9nzmnwkOW5FMffZbLWTMgeIkIQ3wNmhPIK2FC9q7XDUqZ0AXeodgf6RwpXm+8DrHMRztDolIt+thJUNUJI0KtTkJB9+JQknFd4OT3Mgd8NJX3hMoP9NPfFZqgam3NGa8LjUKQXqDMpgoOUJJ30W1mXKLfembRvpND6ragrhKG+FDCsoqNzRn8HHCvKtZyTQ9/lW8e1k+bRkd1++k0OlVQebsfoXTYwR6YslEwleYG7AjKx5JmA3c8JEGV8lXmwP2DRCmohhsqvZNDlflIkZxjyUGSs/rKGNL92l/dMF+EvwP+G78wHPKhfA/Etv3WST8fxYfzpAmGjutkjyAyoVC39qwpvTF1NtEWAXs9ugKbeoY9QEJdwgRG0L6qShduo+U3CXSCJLx9sq4g8j9K9Z+RCXhjzLk1gMYnome3J53alWDNTyhyQF2eCbnliILtOmVYQB+b7jc=
