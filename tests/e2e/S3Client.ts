@@ -5,7 +5,7 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
 describe('S3Client', () => {
   it('should return 404 on missing object', done => {
-    streamS3Object('foo.jpg', (err, response) => {
+    streamS3Object('foo.jpg', 'examples', (err, response) => {
       expect(err).toBeFalsy();
       expect(response).toEqual({ statusCode: 404 });
       done();
@@ -13,7 +13,11 @@ describe('S3Client', () => {
   });
 
   it('should return a stream (with data)', done => {
-    const stream = streamS3Object('test.jpg', (err, response) => {});
+    const stream = streamS3Object(
+      'test.jpg',
+      'examples',
+      (err, response) => {}
+    );
     expect(stream).toBeInstanceOf(Readable);
     stream.on('data', () => done());
   });

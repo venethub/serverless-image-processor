@@ -8,14 +8,14 @@
     "url": "https://github.com/Mercateo/serverless-image-processor"
   },
   "scripts": {
-    "start": "sls offline",
+    "start": "env-cmd .local.env sls offline",
     "test": "jest --testPathPattern=tests/unit --silent",
     "lint": "prettier-tslint check \"{src,tests}/**/*.ts\"",
     "lint:fix": "prettier-tslint fix \"{src,tests}/**/*.ts\"",
     "test:coverage": "jest --coverage --testPathPattern=tests/unit --silent",
     "test:watch": "jest --watch --testPathPattern=tests/unit --silent",
-    "test:e2e": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
-    "test:e2e:u": "sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
+    "test:e2e": "env-cmd .local.env sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e\"",
+    "test:e2e:u": "env-cmd .local.env sls offline --dontPrintOutput --exec \"jest --testPathPattern=tests/e2e -u\""
   },
   "prettier": {
     "parser": "typescript",
@@ -43,6 +43,7 @@
     "axios": "^0.17.0",
     "copy-webpack-plugin": "^4.2.0",
     "coveralls": "^3.0.0",
+    "env-cmd": "^7.0.0",
     "jest": "^21.2.1",
     "prettier": "^1.8.2",
     "prettier-tslint": "^0.3.0",

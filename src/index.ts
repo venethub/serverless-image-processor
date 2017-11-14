@@ -3,17 +3,18 @@ import { streamS3Object } from './S3Client';
 import { isSupportedInputMime, createPipe } from './pipes';
 import { getTransformer } from './Sharp';
 
-export const process = (
+export const handle = (
   event: any,
   context: any,
   cb: (err: any | null, response?: any) => void
 ) => {
-  if (event.pathParameters == null) {
+  if (event.pathParameters == null || event.pathParameters.proxy == null) {
     return cb(null, { statusCode: 400 });
   }
 
   const key = event.pathParameters.proxy as string;
-  const inputStream = streamS3Object(key, cb);
+  const bucket = process.env.BUCKET!;
+  const inputStream = streamS3Object(key, bucket, cb);
   const inputMime = getType(key);
 
   inputStream.once('readable', async () => {

@@ -43,7 +43,7 @@ custom:
 
 functions:
   processor:
-    handler: src/index.process
+    handler: src/index.handle
     timeout: 15
     memorySize: 1532
     environment:
