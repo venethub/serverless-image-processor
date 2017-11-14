@@ -37,5 +37,6 @@ export const getS3ClientConfig = () =>
       }
     : {};
 
+// we should fix this with https://github.com/dherault/serverless-offline/issues/328
 export const getBucketName = () =>
   !isDevEnv() ? process.env.BUCKET! : 'examples';
