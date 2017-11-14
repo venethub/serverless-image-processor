@@ -4281,9 +4281,9 @@ serverless-offline@^3.16.0:
     lodash "^4.17.4"
     velocityjs "^0.9.3"
 
-"serverless-s3-local@https://github.com/otbe/serverless-s3-local.git":
-  version "0.2.7"
-  resolved "https://github.com/otbe/serverless-s3-local.git#52a5b754c7488ab0a2ab391f14607331b2fdbc8a"
+serverless-s3-local@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/serverless-s3-local/-/serverless-s3-local-0.2.8.tgz#1690ea77b79f35685159d6c68f046296c8964c02"
   dependencies:
     aws-sdk "^2.7.0"
     bluebird "^3.4.6"
