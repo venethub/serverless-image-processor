@@ -18,12 +18,4 @@ describe('Lambda', () => {
       expect(e.response.status).toBe(404);
     }
   });
-
-  it('should return 500 for unsupported mime type', async () => {
-    try {
-      await axios.get('http://localhost:3000/foo.bar');
-    } catch (e) {
-      expect(e.response.status).toBe(500);
-    }
-  });
 });
