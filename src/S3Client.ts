@@ -1,13 +1,12 @@
 import * as AWS from 'aws-sdk';
-import { getS3ClientConfig, getBucketName } from './Utils';
+import { getS3ClientConfig } from './Utils';
 
 export const streamS3Object = (
   key: string,
+  bucket: string,
   cb: (err: any | null, response?: any) => void
 ) => {
   const s3Client = new AWS.S3(getS3ClientConfig());
-
-  const bucket = getBucketName();
   const stream = s3Client
     .getObject({
       Key: key,
