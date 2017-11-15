@@ -46,6 +46,7 @@ export interface QueryParams {
   /**
    * Sets the background for embed mode.
    * Accepts every string format which is accepted by https://www.npmjs.com/package/color.
+   * Default: black
    */
   background?: string;
 
