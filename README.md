@@ -59,7 +59,7 @@ export interface QueryParams {
 
   /**
    * Converts the input image to jpg.
-   * Defsult: false
+   * Default: false
    */
   jpg?: boolean;
 
