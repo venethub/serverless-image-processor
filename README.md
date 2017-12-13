@@ -14,9 +14,7 @@ Request flow is:
 User -> Cloudfront -> API Gateway -> Lambda
 
 ## Demo
-[http://d12k6sini6hcl3.cloudfront.net/test.png?width=300](http://d12k6sini6hcl3.cloudfront.net/test.png?width=300)  
-[http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300](http://d12k6sini6hcl3.cloudfront.net/test.jpg?width=300)  
-[http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300](http://d12k6sini6hcl3.cloudfront.net/test.gif?width=300)
+![test.png](https://d12k6sini6hcl3.cloudfront.net/test.png?width=200) ![test.jpg](https://d12k6sini6hcl3.cloudfront.net/test.jpg?width=200) ![test.gif](https://d12k6sini6hcl3.cloudfront.net/test.gif?width=200)
 
 ## Supported formats
   
