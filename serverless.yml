@@ -35,11 +35,6 @@ custom:
       - sharp
   apigwBinary:
     types:
-      - 'image/jpeg'
-      - 'image/png'
-      - 'image/webp'
-      - 'application/octet-stream'
-      - 'text/html'
       - '*/*'
 
 functions:
