@@ -7,6 +7,7 @@ import { pipe, curry } from 'ramda';
 import { embed } from './Embed';
 import { background } from './Background';
 import { max } from './Max';
+import { withoutEnlargement } from './WithoutEnlargement';
 
 export const manipulate = curry(
   (queryParams: InputQueryParams, transformer: SharpInstance) =>
@@ -16,6 +17,7 @@ export const manipulate = curry(
       normalize(queryParams),
       embed(queryParams),
       background(queryParams),
-      max(queryParams)
+      max(queryParams),
+      withoutEnlargement(queryParams)
     )(transformer)
 );

@@ -9,6 +9,7 @@
   },
   "scripts": {
     "start": "env-cmd .local.env sls offline",
+    "sls": "sls",
     "test": "jest --testPathPattern=tests/unit --silent",
     "lint": "prettier-tslint check \"{src,tests}/**/*.ts\"",
     "lint:fix": "prettier-tslint fix \"{src,tests}/**/*.ts\"",

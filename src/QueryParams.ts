@@ -10,6 +10,12 @@ export interface QueryParams {
   height?: number;
 
   /**
+   * Do not enlarge the output image if the input image width or height are already less than the required dimensions.
+   * Default: true
+   */
+  withoutEnlargement?: boolean;
+
+  /**
    * Preserving aspect ratio, resize the image to the maximum width or height specified then embed on a background of the exact width and height specified.
    * Default: false
    */
