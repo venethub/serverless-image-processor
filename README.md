@@ -113,7 +113,7 @@ export interface QueryParams {
 
 That's it! :)
 
-The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```. Due to restrictions in this setup you will only see the Base64 encoded response. 
+The start command will spin up an offline version of an API Gateway and a local S3 server (via [serverless-offline](https://github.com/dherault/serverless-offline)). After this you can query some test images (test.gif, test.jpg and test.png) via ```http://localhost:3000```.
 
 ## Contributing
 Please feel free to open issues or create PRs. :)  
