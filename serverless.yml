@@ -9,7 +9,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   region: ${opt:region, 'us-east-1'}
   stage: ${opt:stage, 'dev'}
   iamRoleStatements:
@@ -30,9 +30,11 @@ custom:
     port: 5445
     directory: .
     cors: false
-  webpackIncludeModules:
-    forceInclude:
-      - sharp
+  webpack:
+    includeModules:
+      forceInclude:
+        - sharp
+    packager: 'yarn'
   apigwBinary:
     types:
       - '*/*'
@@ -41,7 +43,7 @@ functions:
   processor:
     handler: src/index.handle
     timeout: 15
-    memorySize: 1532
+    memorySize: 3008
     environment:
       BUCKET: { Ref: SourceBucket }
     events:

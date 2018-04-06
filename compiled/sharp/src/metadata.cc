@@ -27,7 +27,8 @@ class MetadataWorker : public Nan::AsyncWorker {
   MetadataWorker(
     Nan::Callback *callback, MetadataBaton *baton, Nan::Callback *debuglog,
     std::vector<v8::Local<v8::Object>> const buffersToPersist) :
-    Nan::AsyncWorker(callback), baton(baton), debuglog(debuglog),
+    Nan::AsyncWorker(callback, "sharp:MetadataWorker"),
+    baton(baton), debuglog(debuglog),
     buffersToPersist(buffersToPersist) {
     // Protect Buffer objects from GC, keyed on index
     std::accumulate(buffersToPersist.begin(), buffersToPersist.end(), 0,
@@ -81,6 +82,22 @@ class MetadataWorker : public Nan::AsyncWorker {
         memcpy(baton->icc, icc, iccLength);
         baton->iccLength = iccLength;
       }
+      // IPTC
+      if (image.get_typeof(VIPS_META_IPCT_NAME) == VIPS_TYPE_BLOB) {
+        size_t iptcLength;
+        void const *iptc = image.get_blob(VIPS_META_IPCT_NAME, &iptcLength);
+        baton->iptc = static_cast<char *>(g_malloc(iptcLength));
+        memcpy(baton->iptc, iptc, iptcLength);
+        baton->iptcLength = iptcLength;
+      }
+      // XMP
+      if (image.get_typeof(VIPS_META_XMP_NAME) == VIPS_TYPE_BLOB) {
+        size_t xmpLength;
+        void const *xmp = image.get_blob(VIPS_META_XMP_NAME, &xmpLength);
+        baton->xmp = static_cast<char *>(g_malloc(xmpLength));
+        memcpy(baton->xmp, xmp, xmpLength);
+        baton->xmpLength = xmpLength;
+      }
     }
 
     // Clean up
@@ -123,6 +140,16 @@ class MetadataWorker : public Nan::AsyncWorker {
           New("icc").ToLocalChecked(),
           Nan::NewBuffer(baton->icc, baton->iccLength, sharp::FreeCallback, nullptr).ToLocalChecked());
       }
+      if (baton->iptcLength > 0) {
+        Set(info,
+          New("iptc").ToLocalChecked(),
+          Nan::NewBuffer(baton->iptc, baton->iptcLength, sharp::FreeCallback, nullptr).ToLocalChecked());
+      }
+      if (baton->xmpLength > 0) {
+        Set(info,
+          New("xmp").ToLocalChecked(),
+          Nan::NewBuffer(baton->xmp, baton->xmpLength, sharp::FreeCallback, nullptr).ToLocalChecked());
+      }
       argv[1] = info;
     }
 
@@ -139,12 +166,12 @@ class MetadataWorker : public Nan::AsyncWorker {
     std::string warning = sharp::VipsWarningPop();
     while (!warning.empty()) {
       v8::Local<v8::Value> message[1] = { New(warning).ToLocalChecked() };
-      debuglog->Call(1, message);
+      debuglog->Call(1, message, async_resource);
       warning = sharp::VipsWarningPop();
     }
 
     // Return to JavaScript
-    callback->Call(2, argv);
+    callback->Call(2, argv, async_resource);
   }
 
  private:

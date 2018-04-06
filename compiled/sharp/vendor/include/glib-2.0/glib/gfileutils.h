@@ -5,7 +5,7 @@
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
- * version 2 of the License, or (at your option) any later version.
+ * version 2.1 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -131,6 +131,9 @@ gchar   *g_build_filename     (const gchar *first_element,
                                ...) G_GNUC_MALLOC G_GNUC_NULL_TERMINATED;
 GLIB_AVAILABLE_IN_ALL
 gchar   *g_build_filenamev    (gchar      **args) G_GNUC_MALLOC;
+GLIB_AVAILABLE_IN_2_56
+gchar   *g_build_filename_valist (const gchar  *first_element,
+                                  va_list      *args) G_GNUC_MALLOC;
 
 GLIB_AVAILABLE_IN_ALL
 gint     g_mkdir_with_parents (const gchar *pathname,

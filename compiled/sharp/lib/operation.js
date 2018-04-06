@@ -157,6 +157,26 @@ function sharpen (sigma, flat, jagged) {
 }
 
 /**
+ * Apply median filter.
+ * When used without parameters the default window is 3x3.
+ * @param {Number} [size=3] square mask size: size x size
+ * @returns {Sharp}
+ * @throws {Error} Invalid parameters
+ */
+function median (size) {
+  if (!is.defined(size)) {
+    // No arguments: default to 3x3
+    this.options.medianSize = 3;
+  } else if (is.integer(size) && is.inRange(size, 1, 1000)) {
+    // Numeric argument: specific sigma
+    this.options.medianSize = size;
+  } else {
+    throw new Error('Invalid median size ' + size);
+  }
+  return this;
+}
+
+/**
  * Blur the image.
  * When used without parameters, performs a fast, mild blur of the output image.
  * When a `sigma` is provided, performs a slower, more accurate Gaussian blur.
@@ -332,7 +352,7 @@ function convolve (kernel) {
       !is.integer(kernel.width) || !is.integer(kernel.height) ||
       !is.inRange(kernel.width, 3, 1001) || !is.inRange(kernel.height, 3, 1001) ||
       kernel.height * kernel.width !== kernel.kernel.length
-     ) {
+  ) {
     // must pass in a kernel
     throw new Error('Invalid convolution kernel');
   }
@@ -407,6 +427,33 @@ function boolean (operand, operator, options) {
 }
 
 /**
+ * Apply the linear formula a * input + b to the image (levels adjustment)
+ * @param {Number} [a=1.0] multiplier
+ * @param {Number} [b=0.0] offset
+ * @returns {Sharp}
+ * @throws {Error} Invalid parameters
+ */
+function linear (a, b) {
+  if (!is.defined(a)) {
+    this.options.linearA = 1.0;
+  } else if (is.number(a)) {
+    this.options.linearA = a;
+  } else {
+    throw new Error('Invalid linear transform multiplier ' + a);
+  }
+
+  if (!is.defined(b)) {
+    this.options.linearB = 0.0;
+  } else if (is.number(b)) {
+    this.options.linearB = b;
+  } else {
+    throw new Error('Invalid linear transform offset ' + b);
+  }
+
+  return this;
+}
+
+/**
  * Decorate the Sharp prototype with operation-related functions.
  * @private
  */
@@ -417,6 +464,7 @@ module.exports = function (Sharp) {
     flip,
     flop,
     sharpen,
+    median,
     blur,
     extend,
     flatten,
@@ -427,7 +475,8 @@ module.exports = function (Sharp) {
     normalize,
     convolve,
     threshold,
-    boolean
+    boolean,
+    linear
   ].forEach(function (f) {
     Sharp.prototype[f.name] = f;
   });

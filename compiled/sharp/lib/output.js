@@ -10,12 +10,13 @@ const sharp = require('../build/Release/sharp.node');
  * with JPEG, PNG, WebP, TIFF, DZI, and libvips' V format supported.
  * Note that raw pixel data is only supported for buffer output.
  *
- * A Promises/A+ promise is returned when `callback` is not provided.
+ * A `Promise` is returned when `callback` is not provided.
  *
  * @param {String} fileOut - the path to write the image data to.
  * @param {Function} [callback] - called on completion with two arguments `(err, info)`.
  * `info` contains the output image `format`, `size` (bytes), `width`, `height`,
  * `channels` and `premultiplied` (indicating if premultiplication was used).
+ * When using a crop strategy also contains `cropOffsetLeft` and `cropOffsetTop`.
  * @returns {Promise<Object>} - when no callback is provided
  * @throws {Error} Invalid parameters
  */
@@ -53,7 +54,9 @@ function toFile (fileOut, callback) {
  * - `data` is the output image data.
  * - `info` contains the output image `format`, `size` (bytes), `width`, `height`,
  * `channels` and `premultiplied` (indicating if premultiplication was used).
- * A Promise is returned when `callback` is not provided.
+ * When using a crop strategy also contains `cropOffsetLeft` and `cropOffsetTop`.
+ *
+ * A `Promise` is returned when `callback` is not provided.
  *
  * @param {Object} [options]
  * @param {Boolean} [options.resolveWithObject] Resolve the Promise with an Object containing `data` and `info` properties instead of resolving only with `data`.
@@ -147,8 +150,8 @@ function jpeg (options) {
  * Use these PNG options for output image.
  * @param {Object} [options]
  * @param {Boolean} [options.progressive=false] - use progressive (interlace) scan
- * @param {Number} [options.compressionLevel=6] - zlib compression level
- * @param {Boolean} [options.adaptiveFiltering=true] - use adaptive row filtering
+ * @param {Number} [options.compressionLevel=9] - zlib compression level, 0-9
+ * @param {Boolean} [options.adaptiveFiltering=false] - use adaptive row filtering
  * @param {Boolean} [options.force=true] - force PNG output, otherwise attempt to use input format
  * @returns {Sharp}
  * @throws {Error} Invalid options
@@ -213,7 +216,7 @@ function webp (options) {
  * @param {Number} [options.quality=80] - quality, integer 1-100
  * @param {Boolean} [options.force=true] - force TIFF output, otherwise attempt to use input format
  * @param {Boolean} [options.compression='jpeg'] - compression options: lzw, deflate, jpeg
- * @param {Boolean} [options.predictor='none'] - compression predictor options: none, horizontal, float
+ * @param {Boolean} [options.predictor='horizontal'] - compression predictor options: none, horizontal, float
  * @param {Number} [options.xres=1.0] - horizontal resolution in pixels/mm
  * @param {Number} [options.yres=1.0] - vertical resolution in pixels/mm
  * @param {Boolean} [options.squash=false] - squash 8-bit images down to 1 bit
@@ -316,6 +319,7 @@ function toFormat (format, options) {
  * @param {Object} [tile]
  * @param {Number} [tile.size=256] tile size in pixels, a value between 1 and 8192.
  * @param {Number} [tile.overlap=0] tile overlap in pixels, a value between 0 and 8192.
+ * @param {Number} [tile.angle=0] tile angle of rotation, must be a multiple of 90.
  * @param {String} [tile.container='fs'] tile container, with value `fs` (filesystem) or `zip` (compressed file).
  * @param {String} [tile.layout='dz'] filesystem layout, possible values are `dz`, `zoomify` or `google`.
  * @returns {Sharp}
@@ -358,6 +362,15 @@ function tile (tile) {
         throw new Error('Invalid tile layout ' + tile.layout);
       }
     }
+
+    // Angle of rotation,
+    if (is.defined(tile.angle)) {
+      if (is.integer(tile.angle) && !(tile.angle % 90)) {
+        this.options.tileAngle = tile.angle;
+      } else {
+        throw new Error('Unsupported angle: angle must be a positive/negative multiple of 90 ' + tile.angle);
+      }
+    }
   }
   // Format
   if (is.inArray(this.options.formatOut, ['jpeg', 'png', 'webp'])) {
@@ -365,6 +378,7 @@ function tile (tile) {
   } else if (this.options.formatOut !== 'input') {
     throw new Error('Invalid tile format ' + this.options.formatOut);
   }
+
   return this._updateFormatOut('dz');
 }
 

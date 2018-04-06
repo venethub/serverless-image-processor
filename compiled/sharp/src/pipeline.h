@@ -62,22 +62,26 @@ struct PipelineBaton {
   int channels;
   Canvas canvas;
   int crop;
-  int cropCalcLeft;
-  int cropCalcTop;
+  int embed;
+  bool hasCropOffset;
+  int cropOffsetLeft;
+  int cropOffsetTop;
   bool premultiplied;
   std::string kernel;
-  std::string interpolator;
-  bool centreSampling;
+  bool fastShrinkOnLoad;
   double background[4];
   bool flatten;
   bool negate;
   double blurSigma;
+  int medianSize;
   double sharpenSigma;
   double sharpenFlat;
   double sharpenJagged;
   int threshold;
   bool thresholdGrayscale;
   int trimTolerance;
+  double linearA;
+  double linearB;
   double gamma;
   bool greyscale;
   bool normalise;
@@ -129,6 +133,7 @@ struct PipelineBaton {
   VipsForeignDzContainer tileContainer;
   VipsForeignDzLayout tileLayout;
   std::string tileFormat;
+  int tileAngle;
 
   PipelineBaton():
     input(nullptr),
@@ -145,19 +150,23 @@ struct PipelineBaton {
     channels(0),
     canvas(Canvas::CROP),
     crop(0),
-    cropCalcLeft(-1),
-    cropCalcTop(-1),
+    embed(0),
+    hasCropOffset(false),
+    cropOffsetLeft(0),
+    cropOffsetTop(0),
     premultiplied(false),
-    centreSampling(false),
     flatten(false),
     negate(false),
     blurSigma(0.0),
+    medianSize(0),
     sharpenSigma(0.0),
     sharpenFlat(1.0),
     sharpenJagged(2.0),
     threshold(0),
     thresholdGrayscale(true),
     trimTolerance(0),
+    linearA(1.0),
+    linearB(0.0),
     gamma(0.0),
     greyscale(false),
     normalise(false),
@@ -177,12 +186,12 @@ struct PipelineBaton {
     jpegOvershootDeringing(false),
     jpegOptimiseScans(false),
     pngProgressive(false),
-    pngCompressionLevel(6),
-    pngAdaptiveFiltering(true),
+    pngCompressionLevel(9),
+    pngAdaptiveFiltering(false),
     webpQuality(80),
     tiffQuality(80),
     tiffCompression(VIPS_FOREIGN_TIFF_COMPRESSION_JPEG),
-    tiffPredictor(VIPS_FOREIGN_TIFF_PREDICTOR_NONE),
+    tiffPredictor(VIPS_FOREIGN_TIFF_PREDICTOR_HORIZONTAL),
     tiffSquash(false),
     tiffXres(1.0),
     tiffYres(1.0),
@@ -200,7 +209,8 @@ struct PipelineBaton {
     tileSize(256),
     tileOverlap(0),
     tileContainer(VIPS_FOREIGN_DZ_CONTAINER_FS),
-    tileLayout(VIPS_FOREIGN_DZ_LAYOUT_DZ) {
+    tileLayout(VIPS_FOREIGN_DZ_LAYOUT_DZ),
+    tileAngle(0){
       background[0] = 0.0;
       background[1] = 0.0;
       background[2] = 0.0;
