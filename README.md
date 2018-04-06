@@ -122,7 +122,7 @@ Also make sure you run ```yarn lint``` (and ```yarn lint:fix```) to check for co
 Notice: the end to end tests may fail on your setup. I work on this :/
 
 ## A note on updating sharp
-```sharp``` is fixed at version ```0.18.4```. If you plan to upgrade please follow [this](http://sharp.dimens.io/en/stable/install/#aws-lambda) guide and place the output in the ```compiled/``` folder.
+```sharp``` is fixed at version ```0.20.1```. If you plan to upgrade please follow [this](http://sharp.dimens.io/en/stable/install/#aws-lambda) guide and place the output in the ```compiled/``` folder.
 
 ## Credits
 Example photos by Adi Constantin, Michael DePetris, Blake Connally on Unsplash
