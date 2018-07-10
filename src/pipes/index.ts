@@ -24,6 +24,7 @@ export const createPipe = (
   inputMime: SupportedInputMime,
   inputTransformer: SharpInstance
 ): PipeOutput =>
-  pipe(manipulate(queryParams), convert(queryParams, inputMime))(
-    inputTransformer
-  );
+  pipe(
+    manipulate(queryParams),
+    convert(queryParams, inputMime)
+  )(inputTransformer);
