@@ -12,6 +12,7 @@ provider:
   runtime: nodejs8.10
   region: ${opt:region, 'us-east-1'}
   stage: ${opt:stage, 'dev'}
+  endpointType: REGIONAL
   iamRoleStatements:
     - Effect: Allow
       Action:

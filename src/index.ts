@@ -35,7 +35,8 @@ export const handle = (
       const response = {
         statusCode: 200,
         headers: {
-          'Content-Type': mime
+          'Content-Type': mime,
+          'Cache-Control': 'public, max-age=31536000'
         },
         body: image.toString('base64'),
         isBase64Encoded: true
