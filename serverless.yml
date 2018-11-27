@@ -26,6 +26,7 @@ provider:
         Fn::Join: [ "", [ "arn:aws:s3:::", Ref: SourceBucket, "/*" ] ]
 
 custom:
+  bucketName: ${self:service.name}-bucket-${self:provider.stage}
   s3:
     host: 0.0.0.0
     port: 5445
@@ -46,7 +47,7 @@ functions:
     timeout: 15
     memorySize: 3008
     environment:
-      BUCKET: { Ref: SourceBucket }
+      BUCKET: ${self:custom.bucketName}
     events:
       - http:
           method: get
@@ -56,6 +57,8 @@ resources:
   Resources:
     SourceBucket:
       Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketName}
     WebDistribution:
       Type: AWS::CloudFront::Distribution
       Properties:
