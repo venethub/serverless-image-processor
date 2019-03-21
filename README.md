@@ -105,6 +105,11 @@ export interface QueryParams {
 }
 ```
 
+## Deployment
+
+If you want to deploy this project to AWS please have a look at this documentation https://serverless.com/framework/docs/providers/aws/guide/quick-start/  
+It should give you a very good starting point.
+
 ## Local development
 
 1. ```$ yarn```
