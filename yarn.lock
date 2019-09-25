@@ -175,10 +175,12 @@
   version "9.4.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
-"@types/ramda@^0.25.42":
-  version "0.25.42"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.42.tgz#bec6e54e168409f120a753621edf20cf4d1a4c08"
-  integrity sha512-m8IcEWgJZTb47UARqp2d58f+C8yDxpTC6ElU/muO0z1bYhdgf6LHcO2SE9f1Mt3SJnKCh6GtjKEC99hq6vPnDA==
+"@types/ramda@^0.26.23":
+  version "0.26.23"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.23.tgz#6eb4224531a725612faf3cfe594ebac53a34753a"
+  integrity sha512-O9SNCbs2zvf6OaPP3TERVBsSJJHF/+uTc3FpnLZCCqJAPvcolQyRtpLZGPz8zFi8TM53tL+ZIc012cpfZmpl9w==
+  dependencies:
+    ts-toolbelt "^3.8.75"
 
 "@types/sharp@^0.17.9":
   version "0.17.9"
@@ -6438,6 +6440,11 @@ ts-node@^3.2.0:
     tsconfig "^6.0.0"
     v8flags "^3.0.0"
     yn "^2.0.0"
+
+ts-toolbelt@^3.8.75:
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-3.14.0.tgz#f4c4984cf4e988915a0175fd6a8ded00bd1d23b0"
+  integrity sha512-DYjD8tL7M1kBogRd9UKg3bUP5yh69WWcMSaA3By8ATiJU9fgYudSYIe8tWD5cpPkrGCdGGnKXQHG+5IrjJ5uhQ==
 
 tsconfig@^6.0.0:
   version "6.0.0"
