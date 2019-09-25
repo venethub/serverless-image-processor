@@ -180,9 +180,10 @@
   resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.42.tgz#bec6e54e168409f120a753621edf20cf4d1a4c08"
   integrity sha512-m8IcEWgJZTb47UARqp2d58f+C8yDxpTC6ElU/muO0z1bYhdgf6LHcO2SE9f1Mt3SJnKCh6GtjKEC99hq6vPnDA==
 
-"@types/sharp@^0.17.9":
-  version "0.17.9"
-  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.17.9.tgz#b269c8e24d1a0f30fb50b866cf969f884de68e64"
+"@types/sharp@^0.22.3":
+  version "0.22.3"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.22.3.tgz#db64657398be95c4f4d70d5a81a849bfada6422d"
+  integrity sha512-4fP7DGvNMlk6qy3rtsC24rLttg7oa0yVugFXPRmD8kGxHLvoqiRTVUbcK3qB0eYK6pO9mBWkzAAL7lV1htig3A==
   dependencies:
     "@types/node" "*"
 
