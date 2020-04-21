@@ -48,7 +48,7 @@
     "aws-sdk": "^2.363.0",
     "axios": "^0.18.0",
     "copy-webpack-plugin": "^4.6.0",
-    "coveralls": "^3.0.2",
+    "coveralls": "^3.0.12",
     "env-cmd": "^8.0.2",
     "jest": "^23.6.0",
     "prettier": "^1.15.2",
