@@ -20,7 +20,27 @@ export const handle = (
   inputStream.once('readable', async () => {
     if (!isSupportedInputMime(inputMime)) {
       console.error(`Unsupported image ${key}`);
-      return cb(null, { statusCode: 500 });
+
+      // Not allow to read other files than images
+      // return cb(null, { statusCode: 500 });
+
+      const chunks: Array<Buffer> = [];
+      inputStream.on('data', (chunk) => chunks.push(chunk as Buffer));
+      inputStream.on('end', () => {
+        const response = {
+          statusCode: 200,
+          headers: {
+            'Content-Type': inputMime,
+            'Cache-Control': 'public, max-age=31536000',
+          },
+          body: Buffer.concat(chunks).toString('base64'),
+          isBase64Encoded: true,
+        };
+
+        return cb(null, response);
+      });
+
+      return;
     }
 
     const { transformer, mime } = createPipe(
@@ -36,10 +56,10 @@ export const handle = (
         statusCode: 200,
         headers: {
           'Content-Type': mime,
-          'Cache-Control': 'public, max-age=31536000'
+          'Cache-Control': 'public, max-age=31536000',
         },
         body: image.toString('base64'),
-        isBase64Encoded: true
+        isBase64Encoded: true,
       };
 
       cb(null, response);
